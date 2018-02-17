@@ -8,6 +8,7 @@ namespace DefenderCsharp
 {
     class Defender
     {
+        
         public static void theDefender()
         {
             String first_name;
@@ -24,6 +25,10 @@ namespace DefenderCsharp
 
         }
 
+        /* This method will validate the inputs for the Name
+         * parm @ firstInput = this is the user input of first name
+         * parm @ lastInput = this is the user input of last name
+         */
         private static Boolean NameValidator(String fistInput, String lastInput)
         {
             if (fistInput != null && lastInput != null)
@@ -33,7 +38,9 @@ namespace DefenderCsharp
             return false;
         }
 
-        //A basic Method that Requests input from user and will return it when input is given
+        /* A basic Method that Requests input from user and will return it when input is given
+        *  parm @ typeOfInput = is a String that contains a sentence to Declare the type of input users may enter
+        */
         private static String getUserInput(String typeofInput)
         {
             String input = null;

@@ -4,3 +4,4 @@ C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\Defend
 C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.csprojResolveAssemblyReference.cache
 C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.exe
 C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.pdb
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.csproj.CoreCompileInputs.cache
