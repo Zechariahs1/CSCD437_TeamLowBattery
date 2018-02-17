@@ -1,0 +1,6 @@
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\bin\Debug\DefenderCsharp.exe.config
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\bin\Debug\DefenderCsharp.exe
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\bin\Debug\DefenderCsharp.pdb
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.csprojResolveAssemblyReference.cache
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.exe
+C:\Users\Zechariah\Documents\school\CS\cscd437\git\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Debug\DefenderCsharp.pdb
