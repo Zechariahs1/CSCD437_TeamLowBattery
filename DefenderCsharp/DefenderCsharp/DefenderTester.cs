@@ -13,6 +13,7 @@ namespace DefenderCsharp
         {
             Defender defend = new Defender();
             defend.theDefender();
+            Console.WriteLine("Press Any Key to Exit");
             Console.ReadKey();
         }
     }
