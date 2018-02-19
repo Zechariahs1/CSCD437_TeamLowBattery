@@ -9,10 +9,11 @@ namespace DefenderCsharp
     class Defender
     {
         private RegexValidator regexValidator;
+
         public Defender()
         {
             regexValidator = new RegexValidator();
-        }
+        }//end of Default CtorS
 
         public void theDefender()
         {
@@ -29,10 +30,11 @@ namespace DefenderCsharp
                 {
                     last_name = getUserInput("Enter your Last Name: ");
                     running = NameValidator(last_name,"Last Name");
-                }
+                }//end of if
             } while (!running);
 
-        }
+
+        }//end of theDefender
 
         /* This method will validate the inputs for the Name
          * parm @ firstInput = this is the user input of first name
@@ -44,6 +46,7 @@ namespace DefenderCsharp
             if (input != null)
             {
                 isMatch = regexValidator.getNameRegex(input);
+                //if the regex match is false it will display a message that it is.
                 if(isMatch == false)
                 {
                     Console.WriteLine("Incorrect Input for {0}, Please enter it again.",whichName);
