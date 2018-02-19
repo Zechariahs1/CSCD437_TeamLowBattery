@@ -77,7 +77,8 @@ namespace DefenderCsharp
             //Making sure if the user Inputs an invalid form it will reprompt
             do
             {
-                input = getUserInput("Enter a new Password: ");
+                input = getUserInput("Your password must be 12 to 128 characters long, and must contain at least 1 of each of the following: uppercase letter, lowercase letter, number, and symbol." +
+                                        "\nEnter a new Password: ");
                 running = PassValidator(input);
             } while (!running);
 
@@ -109,7 +110,7 @@ namespace DefenderCsharp
             const string shush = "./sh.ush";
             if (System.IO.File.Exists(shush))
             { 
-                String input = getUserInput("Enter a new Password: ");
+                String input = getUserInput("Enter your Password: ");
                 // Fetch the stored value
                 string savedPasswordHash = System.IO.File.ReadAllText(shush);
                 // Extract the bytes

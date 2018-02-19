@@ -11,6 +11,7 @@ namespace DefenderCsharp
     {
         private String mNameRegex;
         private String mPassRegex;
+        private string[] mPassRegexesEach;
 
         public RegexValidator()
         {
@@ -18,7 +19,17 @@ namespace DefenderCsharp
             mNameRegex = @"^[A-Za-z\\-]{1,50}$";
 
             //A regex that will validate the password
-            mPassRegex = @"^[!-~]{12,128}$"; //TODO update password regex
+            mPassRegex = @"^[!-~]{12,128}$";
+
+            mPassRegexesEach = new string[]
+            {
+                @"^[!-~]*[A-Z]{1}[!-~]*$",
+                @"^[!-~]*[a-z]{1}[!-~]*$",
+                @"^[!-~]*[0-9]{1}[!-~]*$",
+                @"^[!-~]*[!-/:-@\\[-`\\{-~]{1}[!-~]*$"
+            };
+
+
         }
         
         //private method to do the matching
@@ -42,7 +53,21 @@ namespace DefenderCsharp
         //public method that will cehck the input for matches of regex for the Names
         public Boolean getPasswordRegex(String input)
         {
-            return Matcher(input, mPassRegex);
+            return Matcher(input, mPassRegex) && CheckIfContainsEach(input, mPassRegexesEach);
+        }
+
+        private Boolean CheckIfContainsEach(String input, String[] regexes)
+        {
+            if (input == null || regexes == null)
+                return false;
+
+            foreach (String regex in regexes)
+            {
+                var reg = new Regex(regex);
+                if (!(reg.IsMatch(input)))
+                    return false;
+            }
+            return true;
         }
     }
 }
