@@ -57,15 +57,19 @@ namespace DefenderCsharp
             //TODO output file
             //prompts for reads the name of an output file from the user
 
-            //TODO password
             //prompts the user to enter a password, store the password, then ask the user to re-enter the password and verify that it is correct
             EnterPassword();
+            bool valid = CheckPassword();
 
             //TODO get input file
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
 
         }//end of theDefender
 
+        /* This method prompts the user to enter a password, makes sure it is valid, and stores the password
+         * Credit:
+         * https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
+         */
         private void EnterPassword()
         {
             String input;
@@ -96,24 +100,40 @@ namespace DefenderCsharp
 
         }
 
-        private void CheckPassword() //unfinished
+        /* This method asks the user to re-enter the password, and verifies that it is correct
+         * Credit:
+         * https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
+         */
+        private bool CheckPassword()
         {
-            String input = "pw";
-            //step 5 - Verify the user-entered password against a stored password
-            /* Fetch the stored value */
-            string savedPasswordHash = ""; //get from file
-            /* Extract the bytes */
-            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
-            /* Get the salt */
-            byte[] salt = new byte[16];
-            Array.Copy(hashBytes, 0, salt, 0, 16);
-            /* Compute the hash on the password the user entered */
-            var pbkdf2 = new Rfc2898DeriveBytes(input, salt, 10000);
-            byte[] hash = pbkdf2.GetBytes(20);
-            /* Compare the results */
-            for (int i = 0; i < 20; i++)
-                if (hashBytes[i + 16] != hash[i])
-                    throw new UnauthorizedAccessException();
+            const string shush = "./sh.ush";
+            if (System.IO.File.Exists(shush))
+            { 
+                String input = getUserInput("Enter a new Password: ");
+                // Fetch the stored value
+                string savedPasswordHash = System.IO.File.ReadAllText(shush);
+                // Extract the bytes
+                byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+                // Get the salt
+                byte[] salt = new byte[16];
+                Array.Copy(hashBytes, 0, salt, 0, 16);
+                // Compute the hash on the password the user entered
+                var pbkdf2 = new Rfc2898DeriveBytes(input, salt, 10000);
+                byte[] hash = pbkdf2.GetBytes(20);
+                // Compare the results
+                for (int i = 0; i < 20; i++)
+                    if (hashBytes[i + 16] != hash[i])
+                    {
+                        Console.WriteLine("Password was invalid.");
+                        return false;
+                    }
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Error. No password is currently stored.");
+                return false;
+            }
         }
 
         /* This method will validate the inputs for the Name
