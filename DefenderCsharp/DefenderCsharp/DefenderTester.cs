@@ -11,7 +11,9 @@ namespace DefenderCsharp
 
         static void Main(string[] args)
         {
-            Defender.theDefender();
+            Defender defend = new Defender();
+            defend.theDefender();
+            Console.ReadKey();
         }
     }
 }

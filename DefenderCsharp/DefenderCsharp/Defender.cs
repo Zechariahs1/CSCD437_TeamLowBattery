@@ -8,8 +8,13 @@ namespace DefenderCsharp
 {
     class Defender
     {
-        
-        public static void theDefender()
+        private RegexValidator regexValidator;
+        public Defender()
+        {
+            regexValidator = new RegexValidator();
+        }
+
+        public void theDefender()
         {
             String first_name;
             String last_name;
@@ -18,10 +23,14 @@ namespace DefenderCsharp
             do
             {
                 first_name = getUserInput("Enter your First Name: ");
-                last_name = getUserInput("Enter your Last Name: ");
-                running = NameValidator(first_name, last_name);
-
-            } while (running);
+                running = NameValidator(first_name,"First Name");
+           
+                if (running)
+                {
+                    last_name = getUserInput("Enter your Last Name: ");
+                    running = NameValidator(last_name,"Last Name");
+                }
+            } while (!running);
 
         }
 
@@ -29,19 +38,25 @@ namespace DefenderCsharp
          * parm @ firstInput = this is the user input of first name
          * parm @ lastInput = this is the user input of last name
          */
-        private static Boolean NameValidator(String fistInput, String lastInput)
+        private Boolean NameValidator(String input, String whichName)
         {
-            if (fistInput != null && lastInput != null)
+            Boolean isMatch = false;
+            if (input != null)
             {
-
+                isMatch = regexValidator.getNameRegex(input);
+                if(isMatch == false)
+                {
+                    Console.WriteLine("Incorrect Input for {0}, Please enter it again.",whichName);
+                }
             }
-            return false;
+
+            return isMatch;
         }
 
         /* A basic Method that Requests input from user and will return it when input is given
         *  parm @ typeOfInput = is a String that contains a sentence to Declare the type of input users may enter
         */
-        private static String getUserInput(String typeofInput)
+        private String getUserInput(String typeofInput)
         {
             String input = null;
 
