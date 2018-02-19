@@ -1,0 +1,6 @@
+C:\Users\Fletcher7\Source\Repos\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\bin\Release\DefenderCsharp.exe.config
+C:\Users\Fletcher7\Source\Repos\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\bin\Release\DefenderCsharp.exe
+C:\Users\Fletcher7\Source\Repos\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\bin\Release\DefenderCsharp.pdb
+C:\Users\Fletcher7\Source\Repos\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Release\DefenderCsharp.csprojResolveAssemblyReference.cache
+C:\Users\Fletcher7\Source\Repos\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Release\DefenderCsharp.exe
+C:\Users\Fletcher7\Source\Repos\CSCD437_TeamLowBattery\DefenderCsharp\DefenderCsharp\obj\Release\DefenderCsharp.pdb

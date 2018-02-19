@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,13 +59,62 @@ namespace DefenderCsharp
 
             //TODO password
             //prompts the user to enter a password, store the password, then ask the user to re-enter the password and verify that it is correct
+            EnterPassword();
 
             //TODO get input file
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
 
-
-
         }//end of theDefender
+
+        private void EnterPassword()
+        {
+            String input;
+            Boolean running = false;
+            //Making sure if the user Inputs an invalid form it will reprompt
+            do
+            {
+                input = getUserInput("Enter a new Password: ");
+                running = PassValidator(input);
+            } while (!running);
+
+            //step 1 - Create the salt value with a cryptographic PRNG:
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+
+            //step 2 - Create the Rfc2898DeriveBytes and get the hash value:
+            var pbkdf2 = new Rfc2898DeriveBytes(input, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+
+            //step 3 - Combine the salt and password bytes for later use:
+            byte[] hashBytes = new byte[36];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 20);
+
+            //step 4 - Turn the combined salt+hash into a string for storage
+            string savedHash = Convert.ToBase64String(hashBytes);
+            System.IO.File.WriteAllText("./sh.ush", savedHash);
+
+        }
+
+        private void CheckPassword() //unfinished
+        {
+            String input = "pw";
+            //step 5 - Verify the user-entered password against a stored password
+            /* Fetch the stored value */
+            string savedPasswordHash = ""; //get from file
+            /* Extract the bytes */
+            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+            /* Get the salt */
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            /* Compute the hash on the password the user entered */
+            var pbkdf2 = new Rfc2898DeriveBytes(input, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            /* Compare the results */
+            for (int i = 0; i < 20; i++)
+                if (hashBytes[i + 16] != hash[i])
+                    throw new UnauthorizedAccessException();
+        }
 
         /* This method will validate the inputs for the Name
          * parm @ firstInput = this is the user input of first name
@@ -80,6 +130,24 @@ namespace DefenderCsharp
                 if(isMatch == false)
                 {
                     Console.WriteLine("Incorrect Input for {0}, Please enter it again.",whichName);
+                }
+            }
+
+            return isMatch;
+        }
+
+        /* This method will validate the inputs for the Password
+         */
+        private Boolean PassValidator(String input)
+        {
+            Boolean isMatch = false;
+            if (input != null)
+            {
+                isMatch = regexValidator.getPasswordRegex(input);
+                //if the regex match is false it will display a message that it is.
+                if (isMatch == false)
+                {
+                    Console.WriteLine("Password does not meet the minimum criteria. Please enter it again.");
                 }
             }
 
