@@ -18,7 +18,7 @@ namespace DefenderCsharp
             mNameRegex = @"^[A-Za-z\\-]{1,50}$";
 
             //A regex that will validate the password
-            mPassRegex = @"^[A-Za-z0-9]{8,32}$"; //TODO update password regex
+            mPassRegex = @"^[!-~]{12,128}$"; //TODO update password regex
         }
         
         //private method to do the matching
