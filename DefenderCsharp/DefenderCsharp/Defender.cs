@@ -17,8 +17,7 @@ namespace DefenderCsharp
 
         public void theDefender()
         {
-            String first_name;
-            String last_name;
+            String first_name, last_name, input_file, output_file;
             int numOne;
             int numTwo;
 
@@ -50,6 +49,19 @@ namespace DefenderCsharp
                     running = int.TryParse(num_two, out numTwo);
                 }//end of if
             } while (!running);
+
+            //TODO input file
+            //prompts for reads the name of an input file from the user
+
+            //TODO output file
+            //prompts for reads the name of an output file from the user
+
+            //TODO password
+            //prompts the user to enter a password, store the password, then ask the user to re-enter the password and verify that it is correct
+
+            //TODO get input file
+            //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
+
 
 
         }//end of theDefender
