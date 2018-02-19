@@ -15,7 +15,7 @@ namespace DefenderCsharp
         public RegexValidator()
         {
             //A regex that will validate the First and Last name
-            mNameRegex = @"^[A-Za-z\\-]{0,50}$";
+            mNameRegex = @"^[A-Za-z\\-]{1,50}$";
 
             //A regex that will validate the password
             mPassRegex = @"^[A-Za-z0-9]{8,32}$"; //TODO update password regex
