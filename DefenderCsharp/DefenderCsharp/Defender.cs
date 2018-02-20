@@ -10,7 +10,7 @@ namespace DefenderCsharp
     class Defender
     {
         private RegexValidator regexValidator;
-        private const string path1 = "./data", path2 = "./assets";
+        private const string path1 = "./TLB_data", path2 = "./TLB_assets";
 
         public Defender()
         {
@@ -21,11 +21,10 @@ namespace DefenderCsharp
 
         public void theDefender()
         {
-            String first_name, last_name, input_file, output_file;
-            int numOne;
-            int numTwo;
-
-            Boolean running = false;
+            String first_name, last_name, inputText, outputFileName;
+            Boolean validPW, running = false;
+            int numOne,  numTwo;
+            
             //Making sure if the user Inputs an invalid form of name it will reprompt
             do
             {
@@ -55,14 +54,14 @@ namespace DefenderCsharp
             } while (!running);
             
             //prompts for reads the name of an input file from the user
-            String inputText = ReadInputFile();
+            inputText = ReadInputFile();
 
-            //TODO output file
             //prompts for reads the name of an output file from the user
+            outputFileName = GetOutputFile();
 
             //prompts the user to enter a password, store the password, then ask the user to re-enter the password and verify that it is correct
             EnterPassword();
-            bool valid = CheckPassword();
+            validPW = CheckPassword();
 
             //TODO write to file
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
@@ -146,7 +145,7 @@ namespace DefenderCsharp
             String filename;
             do
             {
-                filename = getUserInput("Enter an input file name, ending in .txt (do not include the path): ");
+                filename = getUserInput("Enter an input text file name in the TLB_data folder (do not include the path or '.txt' extension): ") + ".txt";
                 running = FileNameValidator(filename, "Input");
                 filename = path1 + "/" + filename;
                 if (running && !System.IO.File.Exists(filename))
@@ -157,6 +156,19 @@ namespace DefenderCsharp
             } while (!running);
 
             return System.IO.File.ReadAllText(filename);
+        }
+
+        private String GetOutputFile()
+        {
+            Boolean running = false;
+            String filename;
+            do
+            {
+                filename = getUserInput("Enter an output file name (do not include the path or extension): ") + ".txt";
+                running = FileNameValidator(filename, "Output");
+            } while (!running);
+
+            return path1 + "/" + filename;
         }
 
         /* This method will validate the inputs for the Name
