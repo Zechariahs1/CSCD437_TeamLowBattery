@@ -10,10 +10,13 @@ namespace DefenderCsharp
     class Defender
     {
         private RegexValidator regexValidator;
+        private const string path1 = "./data", path2 = "./assets";
 
         public Defender()
         {
             regexValidator = new RegexValidator();
+            System.IO.Directory.CreateDirectory(path1);
+            System.IO.Directory.CreateDirectory(path2);
         }//end of Default CtorS
 
         public void theDefender()
@@ -50,9 +53,9 @@ namespace DefenderCsharp
                     running = int.TryParse(num_two, out numTwo);
                 }//end of if
             } while (!running);
-
-            //TODO input file
+            
             //prompts for reads the name of an input file from the user
+            String inputText = ReadInputFile();
 
             //TODO output file
             //prompts for reads the name of an output file from the user
@@ -61,7 +64,7 @@ namespace DefenderCsharp
             EnterPassword();
             bool valid = CheckPassword();
 
-            //TODO get input file
+            //TODO write to file
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
 
         }//end of theDefender
@@ -97,7 +100,7 @@ namespace DefenderCsharp
 
             //step 4 - Turn the combined salt+hash into a string for storage
             string savedHash = Convert.ToBase64String(hashBytes);
-            System.IO.File.WriteAllText("./sh.ush", savedHash);
+            System.IO.File.WriteAllText(path2 + "/sh.ush", savedHash);
 
         }
 
@@ -107,7 +110,7 @@ namespace DefenderCsharp
          */
         private bool CheckPassword()
         {
-            const string shush = "./sh.ush";
+            const string shush = path2 + "/sh.ush";
             if (System.IO.File.Exists(shush))
             { 
                 String input = getUserInput("Enter your Password: ");
@@ -137,6 +140,25 @@ namespace DefenderCsharp
             }
         }
 
+        private String ReadInputFile()
+        {
+            Boolean running = false;
+            String filename;
+            do
+            {
+                filename = getUserInput("Enter an input file name, ending in .txt (do not include the path): ");
+                running = FileNameValidator(filename, "Input");
+                filename = path1 + "/" + filename;
+                if (running && !System.IO.File.Exists(filename))
+                {
+                    Console.WriteLine("File does not exist.");
+                    running = false;
+                }
+            } while (!running);
+
+            return System.IO.File.ReadAllText(filename);
+        }
+
         /* This method will validate the inputs for the Name
          * parm @ firstInput = this is the user input of first name
          * parm @ lastInput = this is the user input of last name
@@ -150,14 +172,14 @@ namespace DefenderCsharp
                 //if the regex match is false it will display a message that it is.
                 if(isMatch == false)
                 {
-                    Console.WriteLine("Incorrect Input for {0}, Please enter it again.",whichName);
+                    Console.WriteLine("Incorrect Input for {0}, Please enter it again.", whichName);
                 }
             }
 
             return isMatch;
         }
 
-        /* This method will validate the inputs for the Password
+        /* This method will validate the inputs
          */
         private Boolean PassValidator(String input)
         {
@@ -174,6 +196,25 @@ namespace DefenderCsharp
 
             return isMatch;
         }
+
+        /* This method will validate the inputs
+         */
+        private Boolean FileNameValidator(String input, String whichFile)
+        {
+            Boolean isMatch = false;
+            if (input != null)
+            {
+                isMatch = regexValidator.getFileNameRegex(input);
+                //if the regex match is false it will display a message that it is.
+                if (isMatch == false)
+                {
+                    Console.WriteLine("Incorrect Input for {0} File, Please enter it again.", whichFile);
+                }
+            }
+
+            return isMatch;
+        }
+
 
         /* A basic Method that Requests input from user and will return it when input is given
         *  parm @ typeOfInput = is a String that contains a sentence to Declare the type of input users may enter

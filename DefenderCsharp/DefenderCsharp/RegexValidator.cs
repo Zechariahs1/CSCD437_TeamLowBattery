@@ -9,8 +9,7 @@ namespace DefenderCsharp
 {
     class RegexValidator
     {
-        private String mNameRegex;
-        private String mPassRegex;
+        private String mNameRegex, mPassRegex, mFileNameRegex;
         private string[] mPassRegexesEach;
 
         public RegexValidator()
@@ -29,6 +28,8 @@ namespace DefenderCsharp
                 @"^[!-~]*[!-/:-@\\[-`\\{-~]{1}[!-~]*$"
             };
 
+            //A regex that will validate the file names
+            mFileNameRegex = @"^[A-Za-z0-9! #-\\)+-.;=@\\[]-`{}~]{1,255}[.]{1}[t]{1}[x]{1}[t]{1}$";
 
         }
         
@@ -50,7 +51,13 @@ namespace DefenderCsharp
             return Matcher(input, mNameRegex);
         }
 
-        //public method that will cehck the input for matches of regex for the Names
+        //public method that will cehck the input for matches of regex for the file names
+        public Boolean getFileNameRegex(String input)
+        {
+            return Matcher(input, mFileNameRegex);
+        }
+
+        //public method that will cehck the input for matches of regex for the password
         public Boolean getPasswordRegex(String input)
         {
             return Matcher(input, mPassRegex) && CheckIfContainsEach(input, mPassRegexesEach);
