@@ -21,7 +21,8 @@ namespace DefenderCsharp
 
         public void theDefender()
         {
-            String inputText, outputFileName;
+            Int64 sum, product;
+            String inputText, outputText, outputFileName;
             bool validPW;
 
             Tuple<string, string> fullname = GetName();
@@ -36,16 +37,31 @@ namespace DefenderCsharp
             //prompts the user to enter a password, store the password, then ask the user to re-enter the password and verify that it is correct
             EnterPassword();
             validPW = CheckPassword();
-
-            //TODO write to file
+            
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
 
-            /* opens the output file 
-             * and writes the user's name 
-             * along with the result of adding the two integer values 
-             * and the result of multiplying the two integer values, 
-             * followed by the contents of the input file
-             */
+            
+            //the user's name 
+            outputText = "Name: " + fullname.Item1 + " " + fullname.Item2 + Environment.NewLine;
+            //along with the result of adding the two integer values 
+            sum = ints.Item1 + ints.Item2;
+            outputText += "Sum: " + sum + Environment.NewLine;
+            //and the result of multiplying the two integer values, 
+            product = ints.Item1 * ints.Item2;
+            outputText += "Product: " + product + Environment.NewLine;
+            //followed by the contents of the input file
+            outputText += "File Text:" + Environment.NewLine + inputText;
+            //opens the output file and writes 
+            if (System.IO.Directory.Exists(path1))
+            {
+                System.IO.File.WriteAllText(path1 + "/" + outputFileName, outputText);
+                Console.WriteLine("File written.");
+            }
+            else
+                Console.WriteLine("Directory does not exist.");
+
+
+
 
         }//end of theDefender
 
@@ -91,11 +107,11 @@ namespace DefenderCsharp
             return Tuple.Create(first_name, last_name);
         }
 
-            /* This method prompts the user to enter a password, makes sure it is valid, and stores the password
-             * Credit:
-             * https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
-             */
-            private void EnterPassword()
+        /* This method prompts the user to enter a password, makes sure it is valid, and stores the password
+        * Credit:
+        * https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
+        */
+        private void EnterPassword()
         {
             String input;
             Boolean running = false;
