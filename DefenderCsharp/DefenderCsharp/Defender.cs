@@ -21,37 +21,11 @@ namespace DefenderCsharp
 
         public void theDefender()
         {
-            String first_name, last_name, inputText, outputFileName;
-            Boolean validPW, running = false;
-            int numOne,  numTwo;
-            
-            //Making sure if the user Inputs an invalid form of name it will reprompt
-            do
-            {
-                first_name = getUserInput("Enter your First Name: ");
-                running = NameValidator(first_name,"First Name");
-           
-                if (running)
-                {
-                    last_name = getUserInput("Enter your Last Name: ");
-                    running = NameValidator(last_name,"Last Name");
-                }//end of if
-            } while (!running);
+            String inputText, outputFileName;
+            bool validPW;
 
-            //Making sure if the user Inputs an invalid input for the int values it will reprompt
-            //doing it this way the user won't have to reinput everything so once its section is valid it can't be messed with again
-            do
-            {
-                // This way will try to see if it is able to be parsed to int and is in the range on int
-                String num_one = getUserInput("Enter First Number: ");
-                running = int.TryParse(num_one, out numOne); 
-
-                if (running)
-                {
-                    String num_two = getUserInput("Enter Second Number: ");
-                    running = int.TryParse(num_two, out numTwo);
-                }//end of if
-            } while (!running);
+            Tuple<string, string> fullname = GetName();
+            Tuple<int, int> ints = GetInts();
             
             //prompts for reads the name of an input file from the user
             inputText = ReadInputFile();
@@ -66,13 +40,62 @@ namespace DefenderCsharp
             //TODO write to file
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
 
+            /* opens the output file 
+             * and writes the user's name 
+             * along with the result of adding the two integer values 
+             * and the result of multiplying the two integer values, 
+             * followed by the contents of the input file
+             */
+
         }//end of theDefender
 
-        /* This method prompts the user to enter a password, makes sure it is valid, and stores the password
-         * Credit:
-         * https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
-         */
-        private void EnterPassword()
+        private Tuple<int, int> GetInts()
+        {
+            int numOne, numTwo = 0;
+            Boolean running = false;
+            //Making sure if the user Inputs an invalid input for the int values it will reprompt
+            //doing it this way the user won't have to reinput everything so once its section is valid it can't be messed with again
+            do
+            {
+                // This way will try to see if it is able to be parsed to int and is in the range on int
+                String num_one = getUserInput("Enter First Number: ");
+                running = int.TryParse(num_one, out numOne);
+
+                if (running)
+                {
+                    String num_two = getUserInput("Enter Second Number: ");
+                    running = int.TryParse(num_two, out numTwo);
+                }//end of if
+            } while (!running);
+
+            return Tuple.Create(numOne, numTwo);
+        }
+
+        private Tuple<string, string> GetName()
+        {
+            String first_name, last_name = null;
+            Boolean running = false;
+            //Making sure if the user Inputs an invalid form of name it will reprompt
+            do
+            {
+                first_name = getUserInput("Enter your First Name: ");
+                running = NameValidator(first_name, "First Name");
+
+                if (running)
+                {
+                    last_name = getUserInput("Enter your Last Name: ");
+                    running = NameValidator(last_name, "Last Name");
+                }//end of if
+            } while (!running);
+
+            return Tuple.Create(first_name, last_name);
+        }
+
+            /* This method prompts the user to enter a password, makes sure it is valid, and stores the password
+             * Credit:
+             * https://stackoverflow.com/questions/4181198/how-to-hash-a-password/10402129#10402129
+             */
+            private void EnterPassword()
         {
             String input;
             Boolean running = false;
@@ -170,6 +193,7 @@ namespace DefenderCsharp
 
             return path1 + "/" + filename;
         }
+
 
         /* This method will validate the inputs for the Name
          * parm @ firstInput = this is the user input of first name
