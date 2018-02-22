@@ -5,6 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+/*
+ * Zechariah Speer
+ * Fletcher Baker
+ * Dillon Geier
+ */
 namespace DefenderCsharp
 {
     class RegexValidator
