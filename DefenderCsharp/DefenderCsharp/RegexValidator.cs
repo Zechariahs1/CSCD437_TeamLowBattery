@@ -29,7 +29,7 @@ namespace DefenderCsharp
             };
 
             //A regex that will validate the file names
-            mFileNameRegex = @"^[A-Za-z0-9! \\#-\\)\\+-\\.;=@\\[]-`\\{}~]{1,255}[.]{1}[t]{1}[x]{1}[t]{1}$";
+            mFileNameRegex = @"^[A-Za-z0-9! #-\\)+-.;=@\\[]-`{}~]{1,255}[.]{1}[t]{1}[x]{1}[t]{1}$";
 
         }
         
