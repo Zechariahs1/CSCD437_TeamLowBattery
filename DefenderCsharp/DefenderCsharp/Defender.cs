@@ -186,7 +186,7 @@ namespace DefenderCsharp
             String filename;
             do
             {
-                filename = getUserInput("Enter an input text file name in the TLB_data folder (do not include the path or '.txt' extension): ") + ".txt";
+                filename = getUserInput("Enter an input text file name in the TLB_data folder (do not include the path or '.txt' extension): ").Trim() + ".txt";
                 running = FileNameValidator(filename, "Input");
                 filename = path1 + "/" + filename;
                 if (running && !System.IO.File.Exists(filename))
