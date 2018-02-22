@@ -46,17 +46,17 @@ namespace DefenderCsharp
             //the user's name 
             outputText = "Name: " + fullname.Item1 + " " + fullname.Item2 + Environment.NewLine;
             //along with the result of adding the two integer values 
-            sum = ints.Item1 + ints.Item2;
+            sum = ((Int64)ints.Item1) + ((Int64)ints.Item2);
             outputText += "Sum: " + sum + Environment.NewLine;
             //and the result of multiplying the two integer values, 
-            product = ints.Item1 * ints.Item2;
+            product = ((Int64)ints.Item1) * ((Int64)ints.Item2);
             outputText += "Product: " + product + Environment.NewLine;
             //followed by the contents of the input file
             outputText += "File Text:" + Environment.NewLine + inputText;
             //opens the output file and writes 
             if (System.IO.Directory.Exists(path1))
             {
-                System.IO.File.WriteAllText(path1 + "/" + outputFileName, outputText);
+                System.IO.File.WriteAllText(outputFileName, outputText);
                 Console.WriteLine("File written.");
             }
             else

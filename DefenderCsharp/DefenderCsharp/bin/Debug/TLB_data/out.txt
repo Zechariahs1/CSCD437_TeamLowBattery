@@ -1,0 +1,10 @@
+Name: f b
+Sum: 4294967280
+Product: 4611685984067649600
+File Text:
+Name: f- -b-
+Sum: 660869748
+Product: -489847621
+File Text:
+This is the test text from the input file.
+lol
