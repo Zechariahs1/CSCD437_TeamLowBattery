@@ -5,6 +5,12 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * Zechariah Speer
+ * Fletcher Baker
+ * Dillon Geier
+ */
+
 namespace DefenderCsharp
 {
     class Defender
