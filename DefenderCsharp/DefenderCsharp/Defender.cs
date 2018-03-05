@@ -24,25 +24,30 @@ namespace DefenderCsharp
         public void theDefender()
         {
             Int64 sum, product;
-            String inputText, outputText, outputFileName;
+            String inputText, outputText, outputFileName, inputName;
             bool validPW;
 
             Tuple<string, string> fullname = GetName();
             Tuple<int, int> ints = GetInts();
-            
+
             //prompts for reads the name of an input file from the user
-            inputText = ReadInputFile();
+            Tuple<string, string> input = ReadInputFile();
+            inputText = input.Item1;
+            inputName = input.Item2;
 
             //prompts for reads the name of an output file from the user
-            outputFileName = GetOutputFile();
+            outputFileName = GetOutputFile(inputName);
 
             //prompts the user to enter a password, store the password, then ask the user to re-enter the password and verify that it is correct
             EnterPassword();
-            validPW = CheckPassword();
-            
+            do
+            {
+                validPW = CheckPassword();
+            } while (!validPW);
+
             //opens the output file and writes the user's name along with the result of adding the two integer values and the result of multiplying the two integer values, followed by the contents of the input file
 
-            
+
             //the user's name 
             outputText = "Name: " + fullname.Item1 + " " + fullname.Item2 + Environment.NewLine;
             //along with the result of adding the two integer values 
@@ -180,7 +185,7 @@ namespace DefenderCsharp
             }
         }
 
-        private String ReadInputFile()
+        private Tuple<string, string> ReadInputFile()
         {
             Boolean running = false;
             String filename;
@@ -196,18 +201,24 @@ namespace DefenderCsharp
                 }
             } while (!running);
 
-            return System.IO.File.ReadAllText(filename);
+            return Tuple.Create(System.IO.File.ReadAllText(filename), filename);
         }
 
-        private String GetOutputFile()
+        private String GetOutputFile(String inputFile)
         {
-            Boolean running = false;
+            Boolean running = true;
             String filename;
             do
             {
-                filename = getUserInput("Enter an output file name (do not include the path or extension): ") + ".txt";
-                running = FileNameValidator(filename, "Output");
-            } while (!running);
+                if (!running)
+                    Console.WriteLine("Output file cannot overwrite input file. Enter a new name for the output file.");
+                do
+                {
+                    filename = getUserInput("Enter an output file name (do not include the path or extension): ") + ".txt";
+                    running = FileNameValidator(filename, "Output");
+                } while (!running);
+                filename = path1 + "/" + filename;
+            } while (filename.Equals(inputFile));
 
             return path1 + "/" + filename;
         }
